@@ -1,13 +1,8 @@
 version: 2.1
-
-executors:
-  docker-executor:
-    docker:
-      - image: cimg/node:18  # Base executor with Node.js
-
 jobs:
   build-push-run:
-    executor: docker-executor
+    machine:
+      image: ubuntu-2004:current
     steps:
       - checkout  # Get code from GitHub
 
