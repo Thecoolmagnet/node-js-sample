@@ -31,4 +31,7 @@ jobs:
           command: |
             docker tag my-node-app:latest $DOCKERHUB_USERNAME/my-node-app:latest
             docker push $DOCKERHUB_USERNAME/my-node-app:latest
-
+workflows:
+  build_and_test:
+    jobs:
+      - build-push-run
