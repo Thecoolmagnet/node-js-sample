@@ -3,13 +3,13 @@ version: 2.1
 executors:
   docker-executor:
     docker:
-      - image: cimg/node:18  # Base executor with Node.js
+      - image: cimg/node:18
 
 jobs:
-  build-push-run:
+  build-and-push:
     executor: docker-executor
     steps:
-      - checkout  # Get code from GitHub
+      - checkout
 
       - setup_remote_docker:
           docker_layer_caching: true
@@ -17,18 +17,6 @@ jobs:
       - run:
           name: Build Docker image
           command: docker build -t my-node-app .
-
-      - run:
-          name: Run the container
-          command: docker run -d -p 8080:8080 --name my-node-container my-node-app
-
-      - run:
-          name: Wait for app to start
-          command: sleep 5  # Give the app some time to boot up
-
-      - run:
-          name: Check if app is running
-          command: docker ps | grep my-node-container
 
       - run:
           name: Login to Docker Hub
@@ -42,7 +30,7 @@ jobs:
 
 workflows:
   version: 2
-  build_push_run:
+  build_and_push:
     jobs:
-      - build-push-run
+      - build-and-push
 
