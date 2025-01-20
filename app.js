@@ -37,11 +37,6 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 
-app.get("/", (req, res) => {
-  res.send("Hello from Node.js in Docker!");
-});
-
-
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
